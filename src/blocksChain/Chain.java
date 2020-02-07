@@ -22,4 +22,30 @@ public class Chain {
 		System.out.println(blkchain);
 	}
 	
+	public static boolean isChainValid() {
+		
+		Block currentBlock;
+		Block prevBlock;
+		
+		//looping through all the blocks
+		for(int i=1; i<blockchain.size(); i++) {
+			currentBlock = blockchain.get(i);
+			prevBlock = blockchain.get(i-1);
+			
+			//comparing registered hash and calculated hash
+			if(!currentBlock.getHash().equals(currentBlock.calcHash())) {
+				System.out.println("Current Block Hashes are not equal");
+				return false;
+			}
+			
+			//comparing registered hash and calculated hash
+			if(!prevBlock.getHash().equals(prevBlock.calcHash())) {
+				System.out.println("Previous Block Hashes are not equal");
+				return false;
+			}
+			
+		}
+		return true;
+	}
+	
 }
