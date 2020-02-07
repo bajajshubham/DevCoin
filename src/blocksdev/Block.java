@@ -18,6 +18,11 @@ public class Block {
 			this.data = data;
 			this.prevBlockHash=prevBlockHash;
 			this.timestamp = new Date().getTime();
+			this.hash = calcHash();
+		}
+		
+		public String calcHash() {
+			return Uiltiy.applySHA256(prevBlockHash+Long.toString(timestamp)+data);
 		}
 		
 }
