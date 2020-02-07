@@ -1,4 +1,4 @@
-package blocksdev;
+package blocksChain;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
