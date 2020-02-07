@@ -12,7 +12,8 @@ public class Block {
 		//previous block hash
 		private String prevBlockHash;
 		private static Block genesisBlock=null;
-		private int nonce;
+		//use long here
+		private long nonce;
 		
 		
 		//no role of default constructor here as this is block 		
@@ -27,6 +28,10 @@ public class Block {
 			return hash;
 		}
 		
+		public String getData() {
+			return data;
+		}
+		
 		public static Block getGenesisBlock() {
 			return genesisBlock;
 		}
@@ -37,11 +42,11 @@ public class Block {
 		
 		public String calcHash() {
 			return Uiltiy.applySHA256(prevBlockHash+Long.toString(timestamp)+
-					Integer.toString(nonce)+data);
+					Long.toString(nonce)+data);
 		}
 		
 		public void mineBlock(int difficulty) {
-			
+			//'0'*difficulty
 			String target = new String(new char[difficulty]).replace('\0', '0');
 			//System.out.println("Target String: "+target);
 			
@@ -49,6 +54,7 @@ public class Block {
 			while(!hash.substring(0,difficulty).equals(target)) {
 				nonce++;
 				hash = calcHash();
+				//System.out.println("After Calchash: "+hash);
 			}
 			//System.out.println("After Hash: "+hash);
 			System.out.println("Block Minded:"+hash);

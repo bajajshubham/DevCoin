@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 public class Chain {
 	
 	private static ArrayList<Block> blockchain = new ArrayList<>();
+	//problem it is limited to size of String hash or max index-1
 	private static int difficulty=6;
 		
 	public static int getDifficulty() {
@@ -67,6 +68,7 @@ public class Chain {
 	}
 	
 	public static void mineTheBlock() {
+
 		blockchain.get(blockchain.size()-1).mineBlock(difficulty);
 	}
 	
