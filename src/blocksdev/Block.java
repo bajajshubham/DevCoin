@@ -21,6 +21,11 @@ public class Block {
 			this.hash = calcHash();
 		}
 		
+		public String getHash() {
+			return hash;
+		}
+		
+		
 		public String calcHash() {
 			return Uiltiy.applySHA256(prevBlockHash+Long.toString(timestamp)+data);
 		}
