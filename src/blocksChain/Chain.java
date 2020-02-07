@@ -6,7 +6,16 @@ import com.google.gson.GsonBuilder;
 public class Chain {
 	
 	private static ArrayList<Block> blockchain = new ArrayList<>();
-	
+	private static int difficulty=6;
+		
+	public static int getDifficulty() {
+		return difficulty;
+	}
+
+	public static void setDifficulty(int difficulty) {
+		Chain.difficulty = difficulty;
+	}
+
 	public static void addBlock(String data) {
 		if(Block.getGenesisBlock()==null) {
 			Block gBlock = new Block(data,"0");
@@ -27,6 +36,9 @@ public class Chain {
 		Block currentBlock;
 		Block prevBlock;
 		
+		//get a string with '0'*difficulty
+		String hashTarget = new String(new char[difficulty]).replace('\0','0');
+		
 		//looping through all the blocks
 		for(int i=1; i<blockchain.size(); i++) {
 			currentBlock = blockchain.get(i);
@@ -44,8 +56,18 @@ public class Chain {
 				return false;
 			}
 			
+			//check has a solved hash for each block(mining)
+			if(!currentBlock.getHash().substring(0,difficulty).equals(hashTarget)) {
+				System.out.println("The Block hasn't Mined");
+				return false;
+			}
+			
 		}
 		return true;
+	}
+	
+	public static void mineTheBlock() {
+		blockchain.get(blockchain.size()-1).mineBlock(difficulty);
 	}
 	
 }
