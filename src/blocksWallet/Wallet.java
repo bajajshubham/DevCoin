@@ -11,18 +11,10 @@ import java.security.spec.ECGenParameterSpec;
 
 public class Wallet {
 
-	private PublicKey publicKey;
+	public PublicKey publicKey;
 	private PrivateKey privateKey;
 	
 	public Wallet() { generateKeyPair(); } 
-	
-	public PublicKey getPublicKey() {
-		return publicKey;
-	}
-	
-	public PrivateKey getPrivateKey() {
-		return privateKey;
-	}
 
 	//TODO WHY EACH OUTPUT IS PRINTING TWICE WITH DIFF_VALUES
 	//generates public and private key pair
