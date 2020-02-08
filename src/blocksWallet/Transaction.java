@@ -1,7 +1,9 @@
 package blocksWallet;
 
 import java.util.ArrayList;
+import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.Date;
 
 public class Transaction {
 	
@@ -16,6 +18,7 @@ public class Transaction {
 	public float value;
 	//prevention and tampering proof
 	public byte[] signature;
+	public long timestamp;
 	
 	//list of IN's && OUT's
 	//reference to previous transactions
@@ -33,6 +36,7 @@ public class Transaction {
 		this.recipent=recipent;
 		this.value=value;
 		this.transactionsInputs=transactionsInputs;
+		timestamp = new Date().getTime();
 	}
 	
 	//calculation of  hash of transaction
@@ -44,12 +48,31 @@ public class Transaction {
 		return Utility.applySHA256(Utility.getStringFromKey(sender)+
 				Utility.getStringFromKey(recipent)+
 				Float.toString(value)+
+				timestamp+
 				sequence);
 	}
 	
 	//generating/verifying signatures
-	
+	//IN's and OUT's in reality are also used as data 
+	public void generateSignature(PrivateKey key) {
+		String inp = Utility.getStringFromKey(sender)+
+				Utility.getStringFromKey(recipent)+
+				Float.toString(value)+
+				timestamp;
+		//System.out.println("Inp: "+inp);
+		signature = Utility.applyECDSASign(key, inp);
+	}
 	
 	//verifying transactions
-
+	//In reality IN's and OUT's play a role also
+	public boolean verifySignature() {
+		String inp = Utility.getStringFromKey(sender)+
+					 Utility.getStringFromKey(recipent)+
+					 Float.toString(value)+
+					 timestamp;
+		//System.out.println("Inp verify: "+inp);
+		return Utility.verifyECDSASign(sender, inp, signature);
+	}
+	
+	
  }
