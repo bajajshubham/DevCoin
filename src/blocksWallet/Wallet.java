@@ -15,7 +15,12 @@ public class Wallet {
 	private PrivateKey privateKey;
 	
 	public Wallet() { generateKeyPair(); } 
-
+	
+	public PrivateKey getPrivateKey() {
+		return privateKey;
+	}
+	
+	
 	//TODO WHY EACH OUTPUT IS PRINTING TWICE WITH DIFF_VALUES
 	//generates public and private key pair
 	//using EllipticCurveCryptography

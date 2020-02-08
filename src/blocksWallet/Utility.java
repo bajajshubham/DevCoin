@@ -38,7 +38,7 @@ public class Utility {
 		return hexString.toString();
 	}
 
-	//reutrns encoded string from key
+	//return encoded string from key
 	public static String getStringFromKey(Key key) {
 		//System.out.println("Key.getEncoded() -> "+key.getEncoded());
 		//System.out.println("Res -> "+Base64.getEncoder().encodeToString(key.getEncoded()) );

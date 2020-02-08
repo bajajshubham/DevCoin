@@ -8,9 +8,9 @@ public class DemoRun {
 		 Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		 Wallet walletA = new Wallet();
 		 Wallet walletB = new Wallet();
-		 System.out.println("WalletA PK: "+walletA.publicKey);
+		 //System.out.println("WalletA PK: "+walletA.publicKey);
 		 Utility.getStringFromKey(walletA.publicKey);
-		 System.out.println("WalletB PK: "+walletB.publicKey);
+		 //System.out.println("WalletB PK: "+walletB.publicKey);
 		 Utility.getStringFromKey(walletB.publicKey);
 		 
 		 //temp or demo transaction
@@ -18,5 +18,12 @@ public class DemoRun {
 				 ,10,new ArrayList<TransactionsInputs>());
 		 
 		// System.out.println("Transaction Hash: "+transaction.calcHash());
+		 
+		transaction.generateSignature(walletA.getPrivateKey());
+		System.out.println("Generated Signature: "+transaction.signature);
+		System.out.println("Verify Sign: "+transaction.verifySignature());
+		
+		
+		
 	}
 }
