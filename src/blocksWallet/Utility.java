@@ -1,7 +1,9 @@
 package blocksWallet;
 import java.io.UnsupportedEncodingException;
+import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class Utility {
 
@@ -31,5 +33,13 @@ public class Utility {
 		}
 		return hexString.toString();
 	}
+
+	public static String getStringFromKey(Key key) {
+		//System.out.println("Key.getEncoded() -> "+key.getEncoded());
+		//System.out.println("Res -> "+Base64.getEncoder().encodeToString(key.getEncoded()) );
+		return Base64.getEncoder().encodeToString(key.getEncoded());
+	}
+
+
 }
 

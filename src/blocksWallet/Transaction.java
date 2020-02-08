@@ -41,11 +41,15 @@ public class Transaction {
 		//to avoid same hash for 2 identical transactions
 		sequence+=1;
 		//TODO
-		return Utility.applySHA256();
+		return Utility.applySHA256(Utility.getStringFromKey(sender)+
+				Utility.getStringFromKey(recipent)+
+				Float.toString(value)+
+				sequence);
 	}
 	
+	//generating/verifying signatures
 	
 	
-	
-	
+	//verifying transactions
+
  }
