@@ -16,6 +16,12 @@ public class TransactionsOutputs {
 	//id of the transaction this output was created
 	public String parentTransactionID;
 	
+	@Override
+	public String toString() {
+		return "TransactionsOutputs [id=" + id + ", recipent=" + recipent + ", value=" + value
+				+ ", parentTransactionID=" + parentTransactionID + "]";
+	}
+
 	public TransactionsOutputs(PublicKey recipent,float value,String parentTransactionID) {
 		this.recipent=recipent;
 		this.value=value;
