@@ -1,13 +1,17 @@
 package blocksWallet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import com.google.gson.GsonBuilder;
+
 
 public class BlkChain {
 	
 	private static ArrayList<Blocks> blockchain = new ArrayList<>();
 	//problem it is limited to size of String hash or max index-1
 	private static int difficulty=6;
+	public static float minimumTransactionValue = 0.0f;
+	public static HashMap<String,TransactionsOutputs> UTXOs = new HashMap<>();
 		
 	public static int getDifficulty() {
 		return difficulty;
