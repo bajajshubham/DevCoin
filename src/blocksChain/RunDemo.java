@@ -11,8 +11,8 @@ public class RunDemo {
 //		Chain.addBlock("Sblockabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz");
 //		Chain.mineTheBlock();
 		Chain.printPrettyChainASJson();
-
-		System.out.println("Is chain Valid: " + Chain.isChainValid());
+		
+		System.out.println("Is chain Valid: "+Chain.isChainValid());
 	}
 
 }

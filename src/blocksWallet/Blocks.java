@@ -7,9 +7,9 @@ public class Blocks {
 
 	// Number of milliseconds since 1/1/1970
 	private long timestamp;
-	// merkle root takes its place
-	// TODO why
-	// private String data;
+	//merkle root takes its place
+	//TODO why
+	//private String data;
 	// current block hash
 	private String hash;
 	// previous block hash
@@ -17,10 +17,11 @@ public class Blocks {
 	private static Blocks genesisBlock = null;
 	// use long here
 	private long nonce;
-	// Merkle Root for simplifying block-chain, blocks and transactions
+	//Merkle Root for simplifying block-chain, blocks and transactions
 	public String merkleRoot;
 	public ArrayList<Transaction> transactions = new ArrayList<>();
-
+	
+	
 	// no role of default constructor here as this is block
 	public Blocks(String prevBlockHash) {
 		this.prevBlockHash = prevBlockHash;
@@ -45,7 +46,7 @@ public class Blocks {
 	}
 
 	public void mineBlock(int difficulty) {
-		merkleRoot = Utility.getMerkleRoot(transactions);
+		merkleRoot  = Utility.getMerkleRoot(transactions);
 		// '0'*difficulty
 		String target = new String(new char[difficulty]).replace('\0', '0');
 		// System.out.println("Target String: "+target);
@@ -59,19 +60,19 @@ public class Blocks {
 		// System.out.println("After Hash: "+hash);
 		System.out.println("Block Mined:" + hash);
 	}
-
-	// adding transactions to this block
-	// adds transaction to block and so blockchain
+	
+	//adding transactions to this block
+	//adds transaction to block and so blockchain
 	public boolean addTransaction(Transaction transaction) {
-
-		// If Genesis block then ignore
-		// else simple block then
-		// process transaction and checks if Valid
-
-		if (transaction == null)
-			return false;
-		if ((prevBlockHash != "0")) {
-			if (!transaction.processTransaction()) {
+		
+		//If Genesis block then ignore
+		//else simple block then
+		//process transaction and checks if Valid
+		
+		
+		if(transaction==null) return false;
+		if((prevBlockHash != "0")) {
+			if(!transaction.processTransaction()) {
 				System.out.println("#TRANSACTION failed to proces, Discarded");
 				return false;
 			}

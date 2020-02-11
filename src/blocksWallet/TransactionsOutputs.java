@@ -8,33 +8,32 @@ import java.security.PublicKey;
 public class TransactionsOutputs {
 
 	public String id;
-	// New owner of the value
+	//New owner of the value
 	public PublicKey recipent;
-	// amount of coins owned
+	//amount of coins owned
 	public float value;
 	//
-	// id of the transaction this output was created
+	//id of the transaction this output was created
 	public String parentTransactionID;
-
+	
 	@Override
 	public String toString() {
-		return "TransactionsOutputs [id=" + id + ", recipent=" + Utility.getStringFromKey(recipent) + ", value=" + value
+		return "TransactionsOutputs [id=" + id + ", recipent=" + recipent + ", value=" + value
 				+ ", parentTransactionID=" + parentTransactionID + "]";
 	}
 
-	public TransactionsOutputs(PublicKey recipent, float value, String parentTransactionID) {
-		this.recipent = recipent;
-		this.value = value;
-		this.parentTransactionID = parentTransactionID;
-		this.id = Utility.applySHA256(
-				Utility.getStringFromKey(this.recipent) + Float.toString(this.value) + this.parentTransactionID);
+	public TransactionsOutputs(PublicKey recipent,float value,String parentTransactionID) {
+		this.recipent=recipent;
+		this.value=value;
+		this.parentTransactionID=parentTransactionID;
+		this.id = Utility.applySHA256(Utility.getStringFromKey(this.recipent)+
+				Float.toString(this.value)+
+				this.parentTransactionID);
 	}
-
-	// check coins belong to whom
-	// A wallet checks it is for me or user
-	// then add into my wallet
-	// @UTXOs
+	
+	//check coins belong to whom
+	//
 	public boolean isMine(PublicKey publicKey) {
-		return (recipent == publicKey);
+		return (recipent==publicKey);
 	}
 }
