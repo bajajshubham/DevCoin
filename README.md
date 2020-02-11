@@ -3,9 +3,9 @@
   <hr>
   <p>
   
-  I have replicated the NoobCoin from Zero to Hero Blockchain 
-  From The <b> Kass </b> blogs
-  Link is down below, checkout to Learn More than 0.01 for the Blockchain and Co.
+  I have replicated the NoobCoin <b> From Zero to Hero Blockchain  </b> <br>
+  From The <b> Kass </b> blogs <br>
+  Link is down below, checkout to Learn More than 0.01 for the Blockchain and Co. <br>
   <a href="https://medium.com/programmers-blockchain/blockchain-development-mega-guide-5a316e6d10df" target="_blank">
   Kass Blog </a> 
  
