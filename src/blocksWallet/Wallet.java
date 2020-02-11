@@ -8,11 +8,20 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.spec.ECGenParameterSpec;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+
+//TODO
+//Keeping a record of transaction history
 
 public class Wallet {
 
 	public PublicKey publicKey;
 	private PrivateKey privateKey;
+	
+	public HashMap<String,TransactionsOutputs> UTXOs = new HashMap<>();
 	
 	public Wallet() { generateKeyPair(); } 
 	
@@ -62,5 +71,81 @@ public class Wallet {
 		}catch (Exception exception) { exception.printStackTrace(); }
 		
 	}
+	
+	//returns the unspent balance
+	//Store the UTXO's owned by this wallet 
+	//in its UTXOs list
+	public float getBalance() {
+		float total = 0;
+		
+		for(Map.Entry<String, TransactionsOutputs> item: BlkChain.UTXOs.entrySet()) {
+			System.out.println("Get Map.Entry<String, TransactionsOutputs> itemValue: "+item.getValue());
+			TransactionsOutputs UTXO = item.getValue();
+			//If coin belongs to wallet 
+			//add it to list of
+			//unspent transactions
+			if(UTXO.isMine(publicKey)) {
+				//append
+				UTXOs.put(UTXO.id,UTXO);
+				System.out.println("GetBalance TransactionOutputs Value: "+UTXO.value);
+				total+=UTXO.value;
+			}
+		}
+		
+		System.out.println("Get Balance Total: "+total);
+		return total;
+	}
+	
+	
+	//generates a new transactions
+	//from this.wallet or this wallet
+	//that is send funds
+	public Transaction sendFunds(PublicKey _recipient,float value) {
+		
+		//check first enough balance 
+		//to proceed transaction
+		if(getBalance() < value ) {
+			System.out.println("#TRANSACTION Not Enough Funds to send, Transaction Discarded ");
+			return null;
+		}
+		
+		ArrayList<TransactionsInputs> transactionsInputs = new ArrayList<>();
+		float total=0;
+		
+		for(Map.Entry<String,TransactionsOutputs> item: UTXOs.entrySet()) {
+			
+			TransactionsOutputs UTXO = item.getValue();
+			total  += UTXO.value;
+			transactionsInputs.add(new TransactionsInputs(UTXO.id));
+			
+			if(total > value) break;
+		}
+		
+		return (new Transaction(publicKey,_recipient,value,transactionsInputs));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
